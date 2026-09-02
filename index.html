@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phishing Email Analyzer — Case File</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="folder">
+
+  <header class="folder__tab">
+    <div class="tab__left">
+      <span class="tab__mark">&#9670;</span>
+      <div>
+        <h1 class="tab__title">Phishing Email Analyzer</h1>
+        <p class="tab__subtitle">Paste a message. Read the evidence. Decide before you click.</p>
+      </div>
+    </div>
+    <div class="tab__case-no">
+      CASE FILE <span id="case-number">NO. 000000</span>
+    </div>
+  </header>
+
+  <main class="desk">
+
+    <!-- INTAKE -->
+    <section class="intake" aria-label="Email intake">
+      <div class="intake__head">
+        <h2>Intake</h2>
+        <div class="intake__samples">
+          <span>Try a sample:</span>
+          <button class="sample-btn" data-sample="phish1" type="button">Account alert</button>
+          <button class="sample-btn" data-sample="phish2" type="button">Prize scam</button>
+          <button class="sample-btn" data-sample="clean" type="button">Legitimate</button>
+        </div>
+      </div>
+
+      <label class="field-label" for="email-input">Raw email — headers and body (paste everything, including From / Reply-To / Subject lines if you have them)</label>
+      <textarea id="email-input" placeholder="From: &quot;Your Bank&quot; <alerts@example.com>
+Reply-To: ...
+Subject: ...
+
+Paste the full message here, headers and body together..."></textarea>
+
+      <div class="intake__actions">
+        <button id="analyze-btn" class="btn btn--primary" type="button">Examine message</button>
+        <button id="clear-btn" class="btn btn--ghost" type="button">Clear</button>
+      </div>
+    </section>
+
+    <!-- REPORT -->
+    <section class="report" aria-label="Analysis report">
+
+      <div id="report-empty" class="report-empty">
+        <p>No message under examination yet.</p>
+        <p class="report-empty__sub">Paste an email on the left, or load a sample, then press <em>Examine message</em>.</p>
+      </div>
+
+      <div id="report-body" class="report-body" hidden>
+
+        <div class="verdict">
+          <div class="gauge-wrap">
+            <svg id="gauge" viewBox="0 0 200 120" class="gauge">
+              <path class="gauge__track" d="M 20 100 A 80 80 0 0 1 180 100" />
+              <path id="gauge-fill" class="gauge__fill" d="M 20 100 A 80 80 0 0 1 180 100" />
+              <text id="gauge-score" x="100" y="90" class="gauge__score" text-anchor="middle">0</text>
+              <text x="100" y="108" class="gauge__label" text-anchor="middle">RISK SCORE</text>
+            </svg>
+          </div>
+          <div class="verdict__text">
+            <div id="stamp" class="stamp">CLEAR</div>
+            <p id="verdict-summary" class="verdict__summary">Findings will appear here once a message has been examined.</p>
+          </div>
+        </div>
+
+        <div class="section-divider"><span>Sender &amp; routing</span></div>
+        <dl id="sender-facts" class="facts"></dl>
+
+        <div class="section-divider"><span>Flagged indicators — <span id="flag-count">0</span></span></div>
+        <ul id="indicator-list" class="indicators"></ul>
+
+        <div class="section-divider"><span>Links found in message</span></div>
+        <ul id="link-list" class="links"></ul>
+
+        <div class="section-divider"><span>What to do</span></div>
+        <p id="advice" class="advice"></p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="folder__footer">
+    <p>Built by <strong>Priyanka Chomal</strong> — runs entirely in your browser. Nothing you paste here is uploaded or stored anywhere.</p>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
